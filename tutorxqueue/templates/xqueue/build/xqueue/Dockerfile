@@ -7,7 +7,7 @@ RUN apt update && \
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN mkdir /openedx /openedx/data
-RUN git clone https://github.com/edx/xqueue --branch {{ OPENEDX_COMMON_VERSION }} --depth 1 /openedx/xqueue
+RUN git clone https://github.com/edx/xqueue --branch open-release/juniper.2 --depth 1 /openedx/xqueue
 WORKDIR /openedx/xqueue
 
 RUN pip install -r requirements.txt
