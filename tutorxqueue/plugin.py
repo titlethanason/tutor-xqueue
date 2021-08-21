@@ -21,7 +21,7 @@ config = {
     "defaults": {
         "VERSION": __version__,
         "AUTH_USERNAME": "lms",
-        "DOCKER_IMAGE": "overhangio/openedx-xqueue:{{ XQUEUE_VERSION }}",
+        "DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/openedx-xqueue:{{ XQUEUE_VERSION }}",
         "HOST": "xqueue.{{ LMS_HOST }}",
         "MYSQL_DATABASE": "xqueue",
         "MYSQL_USERNAME": "xqueue",
@@ -31,8 +31,8 @@ config = {
 templates = pkg_resources.resource_filename("tutorxqueue", "templates")
 hooks = {
     "init": ["mysql", "xqueue"],
-    "build-image": {"xqueue": "{{ DOCKER_REGISTRY }}{{ XQUEUE_DOCKER_IMAGE }}"},
-    "remote-image": {"xqueue": "{{ DOCKER_REGISTRY }}{{ XQUEUE_DOCKER_IMAGE }}"},
+    "build-image": {"xqueue": "{{ XQUEUE_DOCKER_IMAGE }}"},
+    "remote-image": {"xqueue": "{{ XQUEUE_DOCKER_IMAGE }}"},
 }
 
 
@@ -114,7 +114,7 @@ class Client:
 
         self.base_url = url
         if not self.base_url:
-            scheme = "https" if user_config["ACTIVATE_HTTPS"] else "http"
+            scheme = "https" if user_config["ENABLE_HTTPS"] else "http"
             host = user_config["XQUEUE_HOST"]
             self.base_url = "{}://{}".format(scheme, host)
         self.login()

@@ -3,7 +3,6 @@ from .settings import *
 ALLOWED_HOSTS = [
     "{{ XQUEUE_HOST }}",
     "xqueue",
-    "xqueue.localhost",
 ]
 
 DATABASES = {
@@ -29,3 +28,5 @@ SECRET_KEY = "{{ XQUEUE_SECRET_KEY }}"
 
 USERS = {"{{ XQUEUE_AUTH_USERNAME }}": "{{ XQUEUE_AUTH_PASSWORD}}"}
 XQUEUES = {"openedx": None}
+
+{{ patch("xqueue-settings") }}
